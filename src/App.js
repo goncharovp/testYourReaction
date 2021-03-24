@@ -7,8 +7,6 @@ class App extends React.Component {
         super(props);
 
         this.state = {            
-            green : false,
-            yellow : false,
             color: "red",
             startTime: null,
             tooEarly: null,
@@ -32,7 +30,8 @@ getGreen() {
   this.setState ({
     startTime: new Date(),
     rndTime: time,
-    color: "yellow"
+    color: "yellow",
+    result: 0
   })
 
 
@@ -51,7 +50,8 @@ getRed() {
     this.setState({
       result: new Date() - this.state.startTime - this.state.rndTime
     })
-  } 
+  } ;
+  
   
 
   
