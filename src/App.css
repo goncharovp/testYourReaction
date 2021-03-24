@@ -32,7 +32,7 @@ input {
   height: 40px;
 }
 
-.card {
+.yellow {
   border: 5px solid steelblue;
   border-radius: 25px;
   width: 50%;
@@ -40,10 +40,10 @@ input {
   min-width: 400px;
   margin: 10px auto;
   padding: 40px 20px;
-  background-color: red;
+  background-color: rgb(238, 255, 0);
 }
 
-.overturned {
+.green {
   border: 5px solid steelblue;
   border-radius: 25px;
   width: 50%;
@@ -54,7 +54,7 @@ input {
   background-color: rgb(0, 255, 34);
 }
 
-.container{
+.red{
   border: 5px solid steelblue;
   border-radius: 25px;
   width: 50%;
