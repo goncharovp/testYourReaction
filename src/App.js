@@ -1,6 +1,12 @@
 import React from 'react';
 import './App.css';
 
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min)) + min;
+}
+
 class App extends React.Component {
 
     constructor(props) {
@@ -19,11 +25,7 @@ class App extends React.Component {
     
     
 getGreen() {
-  function getRandomInt(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min)) + min;
-  }
+  
   
   const time = getRandomInt(1000,10000)
 
@@ -57,8 +59,6 @@ getRed() {
   
 }
     render() {
-      const tooEarly = <h1>Слишком рано!</h1>
-      const yourTime = <h1>{this.state.result + "ms"}</h1>
         return (
             <div className="App">
                 <h1>Проверь свою реакцию!</h1>
@@ -69,7 +69,7 @@ getRed() {
                 onClick = {this.getRed}
                 >
                 </div>
-                <ResultZone tooEarly ={tooEarly} yourTime = {yourTime} { ...this.state.color === "yellow" ? tooEarly : this.state.color === "green" ? yourTime : yourTime}/>
+                <ResultZone result={this.state.result} color={this.state.color}/>
                 <Instruction />
             </div>
         );
@@ -113,7 +113,7 @@ class ResultZone extends React.Component {
     return(
     <div>
       <h1>
-        { this.props.color === "yellow" ? props.tooEarly : this.props.color === "green" ? props.yourTime : props.yourTime}
+        { this.props.color === "yellow" ? <h1>Слишком рано!</h1> : this.props.color === "green" ? <h1>{this.props.result + "ms"}</h1> : <h1>{this.props.result + "ms"}</h1>}
         </h1>
         </div>
     )
