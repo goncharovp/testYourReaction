@@ -113,7 +113,7 @@ class ResultZone extends React.Component {
     return(
     <div>
       <h1>
-        { this.props.color === "yellow" ? this.props.tooEarly : this.props.color === "green" ? this.props.yourTime : this.props.yourTime}
+        { this.props.color === "yellow" ? props.tooEarly : this.props.color === "green" ? props.yourTime : props.yourTime}
         </h1>
         </div>
     )
