@@ -70,7 +70,7 @@ getRed() {
                 className ={this.state.color === "red" ? "red" : this.state.color === "yellow" ? "yellow" : "green"}
                 onClick = {this.getRed}
                 >
-
+                  
                 </div>
                 <div>
                   <h1>
