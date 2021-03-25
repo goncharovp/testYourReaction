@@ -68,19 +68,9 @@ getRed() {
                 className ={this.state.color === "red" ? "red" : this.state.color === "yellow" ? "yellow" : "green"}
                 onClick = {this.getRed}
                 >
-
                 </div>
-                <div>
-                  <h1>
-                    { this.state.color === "yellow" ? tooEarly : this.state.color === "green" ? yourTime : yourTime}
-                  </h1>
-                </div>
-                <div>
-                  <p>
-                    После нажатия кнопки "Старт!", поле, в какой-то момент, поменяет цвет на зеленый. Задача - как можно быстрее на него нажать и получить свое время реакции в милисекундах! <br />
-                    Для следующей попытки нажми кнопку "Старт!" еще раз.
-                  </p>
-                </div>
+                <ResultZone tooEarly ={tooEarly} yourTime = {yourTime} { ...this.state.color === "yellow" ? tooEarly : this.state.color === "green" ? yourTime : yourTime}/>
+                <Instruction />
             </div>
         );
     }
@@ -95,6 +85,37 @@ class StartButton extends React.Component {
     <button onClick = {this.props.onClick}>
       Старт!
       </button>
+    )
+  }
+}
+
+class Instruction extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return(
+    <div>
+      <p>
+        После нажатия кнопки "Старт!", поле, в какой-то момент, поменяет цвет на зеленый. Задача - как можно быстрее на него нажать и получить свое время реакции в милисекундах! <br />
+        Для следующей попытки нажми кнопку "Старт!" еще раз.
+        </p>
+        </div>
+    )
+  }
+}
+
+class ResultZone extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return(
+    <div>
+      <h1>
+        { this.props.color === "yellow" ? this.props.tooEarly : this.props.color === "green" ? this.props.yourTime : this.props.yourTime}
+        </h1>
+        </div>
     )
   }
 }
