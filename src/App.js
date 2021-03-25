@@ -63,14 +63,12 @@ getRed() {
             <div className="App">
                 <h1>Проверь свою реакцию!</h1>
                 <br />
-                <button onClick = {this.getGreen}>
-                  Старт!
-                </button>
+                <StartButton onClick = {this.getGreen}/>
                 <div 
                 className ={this.state.color === "red" ? "red" : this.state.color === "yellow" ? "yellow" : "green"}
                 onClick = {this.getRed}
                 >
-                  
+
                 </div>
                 <div>
                   <h1>
@@ -86,6 +84,19 @@ getRed() {
             </div>
         );
     }
+}
+
+class StartButton extends React.Component {
+  constructor(props){
+    super(props);
+  }
+  render() {
+    return(
+    <button onClick = {this.props.onClick}>
+      Старт!
+      </button>
+    )
+  }
 }
 
 export default App;
