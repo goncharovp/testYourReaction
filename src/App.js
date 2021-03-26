@@ -61,19 +61,25 @@ getRed() {
     render() {
         return (
             <div className="App">
-                <h1>Проверь свою реакцию!</h1>
-                <br />
+                <Header />
                 <StartButton onClick = {this.getGreen}/>
-                <div 
-                className ={this.state.color === "red" ? "red" : this.state.color === "yellow" ? "yellow" : "green"}
-                onClick = {this.getRed}
-                >
-                </div>
+                <ReactZone onClick = {this.getRed} color = {this.state.color} />
                 <ResultZone result={this.state.result} color={this.state.color}/>
                 <Instruction />
             </div>
         );
     }
+}
+
+class Header extends React.Component {
+  constructor (props) {
+    super(props);
+  }
+  render() {
+    return (
+      <h1>Проверь свою реакцию!</h1>
+    )
+  }
 }
 
 class StartButton extends React.Component {
@@ -89,18 +95,17 @@ class StartButton extends React.Component {
   }
 }
 
-class Instruction extends React.Component {
-  constructor(props) {
+class ReactZone extends React.Component {
+  constructor(props){
     super(props);
   }
   render() {
     return(
-    <div>
-      <p>
-        После нажатия кнопки "Старт!", поле, в какой-то момент, поменяет цвет на зеленый. Задача - как можно быстрее на него нажать и получить свое время реакции в милисекундах! <br />
-        Для следующей попытки нажми кнопку "Старт!" еще раз.
-        </p>
-        </div>
+      <div 
+                className ={this.props.color === "red" ? "red" : this.props.color === "yellow" ? "yellow" : "green"}
+                onClick = {this.props.onClick}
+                >
+                </div>
     )
   }
 }
@@ -115,6 +120,22 @@ class ResultZone extends React.Component {
       <h1>
         { this.props.color === "yellow" ? <h1>Слишком рано!</h1> : this.props.color === "green" ? <h1>{this.props.result + "ms"}</h1> : <h1>{this.props.result + "ms"}</h1>}
         </h1>
+        </div>
+    )
+  }
+}
+
+class Instruction extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return(
+    <div>
+      <p>
+        После нажатия кнопки "Старт!", поле, в какой-то момент, поменяет цвет на зеленый. Задача - как можно быстрее на него нажать и получить свое время реакции в милисекундах! <br />
+        Для следующей попытки нажми кнопку "Старт!" еще раз.
+        </p>
         </div>
     )
   }
