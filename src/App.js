@@ -1,6 +1,12 @@
 import React from 'react';
 import './App.css';
 
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min)) + min;
+}
+
 class App extends React.Component {
 
     constructor(props) {
@@ -19,11 +25,7 @@ class App extends React.Component {
     
     
 getGreen() {
-  function getRandomInt(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min)) + min;
-  }
+  
   
   const time = getRandomInt(1000,10000)
 
@@ -57,35 +59,86 @@ getRed() {
   
 }
     render() {
-      const tooEarly = <h1>Слишком рано!</h1>
-      const yourTime = <h1>{this.state.result + "ms"}</h1>
         return (
             <div className="App">
-                <h1>Проверь свою реакцию!</h1>
-                <br />
-                <button onClick = {this.getGreen}>
-                  Старт!
-                </button>
-                <div 
-                className ={this.state.color === "red" ? "red" : this.state.color === "yellow" ? "yellow" : "green"}
-                onClick = {this.getRed}
-                >
-                  
-                </div>
-                <div>
-                  <h1>
-                    { this.state.color === "yellow" ? tooEarly : this.state.color === "green" ? yourTime : yourTime}
-                  </h1>
-                </div>
-                <div>
-                  <p>
-                    После нажатия кнопки "Старт!", поле, в какой-то момент, поменяет цвет на зеленый. Задача - как можно быстрее на него нажать и получить свое время реакции в милисекундах! <br />
-                    Для следующей попытки нажми кнопку "Старт!" еще раз.
-                  </p>
-                </div>
+                <Header />
+                <StartButton onClick = {this.getGreen}/>
+                <ReactZone onClick = {this.getRed} color = {this.state.color} />
+                <ResultZone result={this.state.result} color={this.state.color}/>
+                <Instruction />
             </div>
         );
     }
+}
+
+class Header extends React.Component {
+  constructor (props) {
+    super(props);
+  }
+  render() {
+    return (
+      <h1>Проверь свою реакцию!</h1>
+    )
+  }
+}
+
+class StartButton extends React.Component {
+  constructor(props){
+    super(props);
+  }
+  render() {
+    return(
+    <button onClick = {this.props.onClick}>
+      Старт!
+      </button>
+    )
+  }
+}
+
+class ReactZone extends React.Component {
+  constructor(props){
+    super(props);
+  }
+  render() {
+    return(
+      <div 
+                className ={this.props.color === "red" ? "red" : this.props.color === "yellow" ? "yellow" : "green"}
+                onClick = {this.props.onClick}
+                >
+                </div>
+    )
+  }
+}
+
+class ResultZone extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return(
+    <div>
+      <h1>
+        { this.props.color === "yellow" ? <h1>Слишком рано!</h1> : this.props.color === "green" ? <h1>{this.props.result + "ms"}</h1> : <h1>{this.props.result + "ms"}</h1>}
+        </h1>
+        </div>
+    )
+  }
+}
+
+class Instruction extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return(
+    <div>
+      <p>
+        После нажатия кнопки "Старт!", поле, в какой-то момент, поменяет цвет на зеленый. Задача - как можно быстрее на него нажать и получить свое время реакции в милисекундах! <br />
+        Для следующей попытки нажми кнопку "Старт!" еще раз.
+        </p>
+        </div>
+    )
+  }
 }
 
 export default App;
