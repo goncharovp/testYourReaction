@@ -48,10 +48,12 @@ getRed() {
       result: "Слишком рано!",
     })
   } else {
-    this.setState({
-      color: "red",
-      result: new Date() - this.state.startTime - this.state.rndTime + 'ms',
-    });
+    if (this.state.color !== "red") {
+      this.setState({
+        color: "red",
+        result: new Date() - this.state.startTime - this.state.rndTime + 'ms',
+      });
+    }
   };
 };
 
