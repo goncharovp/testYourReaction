@@ -15,9 +15,8 @@ class App extends React.Component {
         this.state = {            
             color: "red",
             startTime: null,
-            tooEarly: null,
             rndTime: null,
-            result: 0
+            result: ''
         }
         this.getGreen = this.getGreen.bind(this)
         this.getRed = this.getRed.bind(this)
@@ -25,15 +24,14 @@ class App extends React.Component {
     
     
 getGreen() {
-  
-  
-  const time = getRandomInt(1000,10000)
+   
+  const time = getRandomInt(1000,5000)
 
   this.setState ({
     startTime: new Date(),
     rndTime: time,
     color: "yellow",
-    result: 0
+    result: ""
   })
 
 
@@ -42,29 +40,28 @@ getGreen() {
       color: "green"
     }), time
   );
-}
+};
 
 getRed() {
-  if (this.state.color === "green") {
-    this.setState({
-      color: "red"
-    });
-    this.setState({
-      result: new Date() - this.state.startTime - this.state.rndTime
+  if (this.state.color === "yellow") {
+    this.setState ({
+      result: "Слишком рано!",
     })
-  } ;
-  
-  
+  } else {
+    this.setState({
+      color: "red",
+      result: new Date() - this.state.startTime - this.state.rndTime + 'ms',
+    });
+  };
+};
 
-  
-}
     render() {
         return (
             <div className="App">
                 <Header />
                 <StartButton onClick = {this.getGreen}/>
                 <ReactZone onClick = {this.getRed} color = {this.state.color} />
-                <ResultZone result={this.state.result} color={this.state.color}/>
+                <ResultZone result = {this.state.result}/>
                 <Instruction />
             </div>
         );
@@ -118,7 +115,7 @@ class ResultZone extends React.Component {
     return(
     <div>
       <h1>
-        { this.props.color === "yellow" ? <h1>Слишком рано!</h1> : this.props.color === "green" ? <h1>{this.props.result + "ms"}</h1> : <h1>{this.props.result + "ms"}</h1>}
+        {this.props.result}
         </h1>
         </div>
     )
