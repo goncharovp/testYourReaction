@@ -7,6 +7,14 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
+function sum() {
+  let sum = 0;
+   for (let i=0; i<arguments.length; i++) {
+    sum += arguments[i];
+   }
+   return sum;
+  }
+
 class App extends React.Component {
 
     constructor(props) {
@@ -56,7 +64,7 @@ getRed() {
     if (this.state.color !== "red") {
       this.setState({
         color: "red",
-        result: new Date() - this.state.startTime - this.state.rndTime + 'ms',
+        result: new Date() - this.state.startTime - this.state.rndTime,
       });
     }
   }; 
@@ -86,11 +94,11 @@ submitAndContinue() {
         return (
             <div className="App">
                 <Header />
-                <StartButton onClick = {this.getGreen}/>
-                {this.state.result === '' && <ContinueButton onClick = {this.submitAndContinue}/>}
+                <StartButton onClick = {this.getGreen} avgResult = {this.state.avgResult}/>
+                {this.state.result !== '' && <ContinueButton onClick = {this.submitAndContinue}/>}
                 <ReactZone onClick = {this.getRed} color = {this.state.color} />
-                <ResultZone result = {this.state.result}/>
-                <Results avgResult = {this.state.avgResult}/>
+                {this.state.result !== '' && <ResultZone result = {this.state.result}/>}
+                {this.state.avgResult.length !== 0 && <Results avgResult = {this.state.avgResult}/>}
                 <Instruction />
             </div>
         );
@@ -116,7 +124,7 @@ class StartButton extends React.Component {
     return(
       <div>
     <button onClick = {this.props.onClick}>
-      Старт!
+      {this.props.avgResult.length !== 0 ? "Заново" : "Старт!"}
       </button>
       </div>
     )
@@ -161,7 +169,7 @@ class ResultZone extends React.Component {
     return(
     <div>
       <h1>
-        {this.props.result}
+        {this.props.result + "ms"}
         </h1>
         </div>
     )
@@ -175,7 +183,7 @@ class Results extends React.Component {
   render() {
     return(
       <div>
-        <h2>{this.props.avgResult.length === 0 ? " " : "Ваши результаты: " + this.props.avgResult.join(', ')}</h2>
+        <h2>{this.props.avgResult.length === 5 ? "Ваш средний результат: " + this.props.avgResult.reduce((total, amount) => total + amount) /5 + "ms" : "Ваши результаты: " + this.props.avgResult.join('ms, ') + 'ms'}</h2>
       </div>
     )
   }
