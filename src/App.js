@@ -16,10 +16,12 @@ class App extends React.Component {
             color: "red",
             startTime: null,
             rndTime: null,
-            result: ''
+            result: '',
+            avgResult: []
         }
         this.getGreen = this.getGreen.bind(this)
         this.getRed = this.getRed.bind(this)
+        this.submitAndContinue = this.submitAndContinue.bind(this)
     }
     
     
@@ -31,7 +33,8 @@ getGreen() {
     startTime: new Date(),
     rndTime: time,
     color: "yellow",
-    result: ""
+    result: "",
+    avgResult:[]
   })
 
 
@@ -41,6 +44,8 @@ getGreen() {
     }), time
   );
 };
+
+
 
 getRed() {
   if (this.state.color === "yellow") {
@@ -54,7 +59,27 @@ getRed() {
         result: new Date() - this.state.startTime - this.state.rndTime + 'ms',
       });
     }
-  };
+  }; 
+};
+
+submitAndContinue() {
+  this.state.avgResult.splice(this.state.avgResult.length,0,this.state.result)
+   
+  const time = getRandomInt(1000,5000)
+
+  this.setState ({
+    startTime: new Date(),
+    rndTime: time,
+    color: "yellow",
+    result: "",
+  })
+
+
+  setTimeout(
+    () => this.setState({
+      color: "green"
+    }), time
+  );
 };
 
     render() {
@@ -62,8 +87,10 @@ getRed() {
             <div className="App">
                 <Header />
                 <StartButton onClick = {this.getGreen}/>
+                {this.state.result === '' && <ContinueButton onClick = {this.submitAndContinue}/>}
                 <ReactZone onClick = {this.getRed} color = {this.state.color} />
                 <ResultZone result = {this.state.result}/>
+                <Results avgResult = {this.state.avgResult}/>
                 <Instruction />
             </div>
         );
@@ -87,9 +114,26 @@ class StartButton extends React.Component {
   }
   render() {
     return(
+      <div>
     <button onClick = {this.props.onClick}>
       Старт!
       </button>
+      </div>
+    )
+  }
+}
+
+class ContinueButton extends React.Component {
+  constructor(props){
+    super(props);
+  }
+  render() {
+    return(
+      <div>
+      <button onClick = {this.props.onClick}>
+        Далее
+      </button>
+      </div>
     )
   }
 }
@@ -120,6 +164,19 @@ class ResultZone extends React.Component {
         {this.props.result}
         </h1>
         </div>
+    )
+  }
+}
+
+class Results extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return(
+      <div>
+        <h2>{this.props.avgResult.length === 0 ? " " : "Ваши результаты: " + this.props.avgResult.join(', ')}</h2>
+      </div>
     )
   }
 }
