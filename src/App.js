@@ -146,6 +146,21 @@ class ContinueButton extends React.Component {
   }
 }
 
+class ResultButton extends React.Component {
+  constructor(props){
+    super(props);
+  }
+  render(){
+    return(
+      <div>
+        <button>
+          Узнать результат!
+        </button>
+      </div>
+    )
+  }
+}
+
 class ReactZone extends React.Component {
   constructor(props){
     super(props);
@@ -169,7 +184,7 @@ class ResultZone extends React.Component {
     return(
     <div>
       <h1>
-        {this.props.result + "ms"}
+        {this.props.result === "Слишком рано!" ? this.props.result : this.props.result + "ms"}
         </h1>
         </div>
     )
