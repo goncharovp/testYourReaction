@@ -1,5 +1,6 @@
 body {
-  background: lightgoldenrodyellow;
+  background: linear-gradient(to top, #dbd7e2, #7b738a);
+  height: 100vh;
   font-family: 'Verdana', sans-serif;
   font-size: 20px;
 }
@@ -9,6 +10,8 @@ input {
   margin: 10px;
   border-radius: 5px;
 }
+
+
 
 .App {
   text-align: center;
