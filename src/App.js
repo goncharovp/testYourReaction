@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 
+
 function getRandomInt(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
@@ -121,7 +122,9 @@ class Header extends React.Component {
   }
   render() {
     return (
+      <div className = 'header'>
       <h1>Проверь свою реакцию!</h1>
+      </div>
     )
   }
 }
