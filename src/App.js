@@ -7,6 +7,14 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
+function sum() {
+  let sum = 0;
+   for (let i=0; i<arguments.length; i++) {
+    sum += arguments[i];
+   }
+   return sum;
+  }
+
 class App extends React.Component {
 
     constructor(props) {
@@ -16,22 +24,26 @@ class App extends React.Component {
             color: "red",
             startTime: null,
             rndTime: null,
-            result: ''
+            result: '',
+            avgResult: []
         }
-        this.getGreen = this.getGreen.bind(this)
-        this.getRed = this.getRed.bind(this)
+        this.getGreen = this.getGreen.bind(this);
+        this.getRed = this.getRed.bind(this);
+        this.submitAndContinue = this.submitAndContinue.bind(this);
+        this.getYourResult = this.getYourResult.bind(this);
     }
     
     
 getGreen() {
    
-  const time = getRandomInt(1000,5000)
+  const time = getRandomInt(1000,2000)
 
   this.setState ({
     startTime: new Date(),
     rndTime: time,
     color: "yellow",
-    result: ""
+    result: "",
+    avgResult:[]
   })
 
 
@@ -42,6 +54,8 @@ getGreen() {
   );
 };
 
+
+
 getRed() {
   if (this.state.color === "yellow") {
     this.setState ({
@@ -51,19 +65,50 @@ getRed() {
     if (this.state.color !== "red") {
       this.setState({
         color: "red",
-        result: new Date() - this.state.startTime - this.state.rndTime + 'ms',
+        result: new Date() - this.state.startTime - this.state.rndTime,
       });
     }
-  };
+  }; 
 };
+
+submitAndContinue() {
+  this.state.avgResult.splice(this.state.avgResult.length,0,this.state.result)
+   
+  const time = getRandomInt(1000,5000)
+
+  this.setState ({
+    startTime: new Date(),
+    rndTime: time,
+    color: "yellow",
+    result: "",
+  })
+
+
+  setTimeout(
+    () => this.setState({
+      color: "green"
+    }), time
+  );
+};
+
+getYourResult() {
+  this.state.avgResult.splice(this.state.avgResult.length,0,this.state.result)
+
+  this.setState({
+    color: "red"
+  })
+}
 
     render() {
         return (
             <div className="App">
                 <Header />
-                <StartButton onClick = {this.getGreen}/>
+                <StartButton onClick = {this.getGreen} avgResult = {this.state.avgResult}/>
+                {this.state.avgResult.length < 4 && this.state.result !== '' && <ContinueButton onClick = {this.submitAndContinue}/>}
+                {this.state.avgResult.length === 4 && <ResultButton onClick = {this.getYourResult} />}
                 <ReactZone onClick = {this.getRed} color = {this.state.color} />
-                <ResultZone result = {this.state.result}/>
+                {this.state.avgResult.length < 5 && this.state.result !== '' && <ResultZone result = {this.state.result}/>}
+                {this.state.avgResult.length !== 0 && <Results avgResult = {this.state.avgResult}/>}
                 <Instruction />
             </div>
         );
@@ -87,9 +132,41 @@ class StartButton extends React.Component {
   }
   render() {
     return(
+      <div>
     <button onClick = {this.props.onClick}>
-      Старт!
+      {this.props.avgResult.length !== 0 ? "Заново" : "Старт!"}
       </button>
+      </div>
+    )
+  }
+}
+
+class ContinueButton extends React.Component {
+  constructor(props){
+    super(props);
+  }
+  render() {
+    return(
+      <div>
+      <button onClick = {this.props.onClick}>
+        Далее
+      </button>
+      </div>
+    )
+  }
+}
+
+class ResultButton extends React.Component {
+  constructor(props){
+    super(props);
+  }
+  render(){
+    return(
+      <div>
+        <button onClick = {this.props.onClick}>
+          Узнать результат!
+        </button>
+      </div>
     )
   }
 }
@@ -117,9 +194,22 @@ class ResultZone extends React.Component {
     return(
     <div>
       <h1>
-        {this.props.result}
+        {this.props.result === "Слишком рано!" ? this.props.result : this.props.result + "ms"}
         </h1>
         </div>
+    )
+  }
+}
+
+class Results extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return(
+      <div>
+        <h2>{this.props.avgResult.length === 5 ? "Ваш средний результат: " + this.props.avgResult.reduce((total, amount) => total + amount) /5 + "ms" : "Ваши результаты: " + this.props.avgResult.join('ms, ') + 'ms'}</h2>
+      </div>
     )
   }
 }
