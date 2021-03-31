@@ -27,15 +27,16 @@ class App extends React.Component {
             result: '',
             avgResult: []
         }
-        this.getGreen = this.getGreen.bind(this)
-        this.getRed = this.getRed.bind(this)
-        this.submitAndContinue = this.submitAndContinue.bind(this)
+        this.getGreen = this.getGreen.bind(this);
+        this.getRed = this.getRed.bind(this);
+        this.submitAndContinue = this.submitAndContinue.bind(this);
+        this.getYourResult = this.getYourResult.bind(this);
     }
     
     
 getGreen() {
    
-  const time = getRandomInt(1000,5000)
+  const time = getRandomInt(1000,2000)
 
   this.setState ({
     startTime: new Date(),
@@ -90,14 +91,23 @@ submitAndContinue() {
   );
 };
 
+getYourResult() {
+  this.state.avgResult.splice(this.state.avgResult.length,0,this.state.result)
+
+  this.setState({
+    color: "red"
+  })
+}
+
     render() {
         return (
             <div className="App">
                 <Header />
                 <StartButton onClick = {this.getGreen} avgResult = {this.state.avgResult}/>
-                {this.state.result !== '' && <ContinueButton onClick = {this.submitAndContinue}/>}
+                {this.state.avgResult.length < 4 && this.state.result !== '' && <ContinueButton onClick = {this.submitAndContinue}/>}
+                {this.state.avgResult.length === 4 && <ResultButton onClick = {this.getYourResult} />}
                 <ReactZone onClick = {this.getRed} color = {this.state.color} />
-                {this.state.result !== '' && <ResultZone result = {this.state.result}/>}
+                {this.state.avgResult.length < 5 && this.state.result !== '' && <ResultZone result = {this.state.result}/>}
                 {this.state.avgResult.length !== 0 && <Results avgResult = {this.state.avgResult}/>}
                 <Instruction />
             </div>
@@ -153,7 +163,7 @@ class ResultButton extends React.Component {
   render(){
     return(
       <div>
-        <button>
+        <button onClick = {this.props.onClick}>
           Узнать результат!
         </button>
       </div>
