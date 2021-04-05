@@ -1,5 +1,5 @@
 body {
-  background: linear-gradient(to top, #dbd7e2, #7b738a);
+  background: linear-gradient(to top, #1055a5, #04010a);
   height: 100vh;
   font-family: 'Verdana', sans-serif;
   font-size: 20px;
@@ -11,7 +11,9 @@ input {
   border-radius: 5px;
 }
 
-
+.Logo {
+  height: 200px
+}
 
 .App {
   text-align: center;
@@ -66,4 +68,8 @@ input {
   margin: 10px auto;
   padding: 40px 20px;
   background-color: red;
+}
+
+.Instruction {
+  color: white;
 }
