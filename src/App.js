@@ -151,7 +151,7 @@ class StartButton extends React.Component {
   render() {
     return(
       <div>
-    <button onClick = {this.props.onClick}>
+    <button className = "Button" onClick = {this.props.onClick}>
       {this.props.avgResult.length !== 0 ? "Заново" : "Старт!"}
       </button>
       </div>
@@ -165,11 +165,11 @@ class ContinueButton extends React.Component {
   }
   render() {
     return(
-      <div>
-      <button onClick = {this.props.onClick}>
+      
+      <button className = "Button" onClick = {this.props.onClick}>
         Далее
       </button>
-      </div>
+      
     )
   }
 }
@@ -181,7 +181,7 @@ class ResultButton extends React.Component {
   render(){
     return(
       <div>
-        <button onClick = {this.props.onClick}>
+        <button className = "Button" onClick = {this.props.onClick}>
           Узнать результат!
         </button>
       </div>
