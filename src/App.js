@@ -1,5 +1,7 @@
 import React from 'react';
 import './App.css';
+import mylogo from './mylogosmall.png';
+
 
 
 function getRandomInt(min, max) {
@@ -103,7 +105,7 @@ getYourResult() {
     render() {
         return (
             <div className="App">
-                <Header />
+                <Logo />
                 <StartButton onClick = {this.getGreen} avgResult = {this.state.avgResult}/>
                 {this.state.avgResult.length < 4 && this.state.result !== '' && <ContinueButton onClick = {this.submitAndContinue}/>}
                 {this.state.avgResult.length === 4 && <ResultButton onClick = {this.getYourResult} />}
@@ -114,6 +116,19 @@ getYourResult() {
             </div>
         );
     }
+}
+
+class Logo extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <div>
+        <img className = "Logo" src={mylogo} alt ='logo'/>
+      </div>
+    )
+  }
 }
 
 class Header extends React.Component {
@@ -223,10 +238,11 @@ class Instruction extends React.Component {
   }
   render() {
     return(
-    <div>
+    <div className = "Instruction">
       <p>
         После нажатия кнопки "Старт!", поле, в какой-то момент, поменяет цвет на зеленый. Задача - как можно быстрее на него нажать и получить свое время реакции в милисекундах! <br />
-        Для следующей попытки нажми кнопку "Старт!" еще раз.
+        У Вас будет 5 попыток, после которых, Вы получите среднее время реакции! <br />
+        Для следующей попытки нажми кнопку "Далее", для того, чтобы начать заново - нажминет кнопку "Заново".
         </p>
         </div>
     )
