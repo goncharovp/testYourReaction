@@ -3,6 +3,7 @@ body {
   height: 100vh;
   font-family: 'Verdana', sans-serif;
   font-size: 20px;
+  color: white;
 }
 
 input {
@@ -38,7 +39,7 @@ input {
 }
 
 .yellow {
-  border: 5px solid steelblue;
+  border: 5px solid rgb(0, 0, 0);
   border-radius: 25px;
   width: 50%;
   height: 400px;
@@ -49,7 +50,7 @@ input {
 }
 
 .green {
-  border: 5px solid steelblue;
+  border: 5px solid rgb(0, 0, 0);
   border-radius: 25px;
   width: 50%;
   height: 400px;
@@ -60,7 +61,7 @@ input {
 }
 
 .red{
-  border: 5px solid steelblue;
+  border: 5px solid rgb(0, 0, 0);
   border-radius: 25px;
   width: 50%;
   height: 400px;
