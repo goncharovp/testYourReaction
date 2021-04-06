@@ -13,7 +13,10 @@ input {
 }
 
 .Logo {
-  height: 200px
+  height: 102px;
+  width: 673px;
+  margin: 0px;
+  padding: 0px
 }
 
 .App {
@@ -103,10 +106,10 @@ input {
   margin: 10px 20px;
   position: relative;
   overflow: hidden;
-  border: 2px solid #fe6637;
+  border: 2px solid #24a5d8;
   border-radius: 8px;
   font-family: 'Montserrat', sans-serif;
-  color: #fe6637;
+  color: #24a5d8;
   transition: .2s ease-in-out;
 }
 .Button:before {
@@ -120,8 +123,8 @@ input {
   transform: skewX(-45deg);
 }
 .Button:hover {
-  background: #fe6637;
-  color: #fff;
+  background: #24a5d8;
+  color: rgb(255, 253, 253);
 }
 .Button:hover:before {
   left: 150px;
