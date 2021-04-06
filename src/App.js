@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import mylogo from './mylogosmall.png';
+import mylogo from './mylogosmall2.png';
 
 
 
@@ -150,11 +150,11 @@ class StartButton extends React.Component {
   }
   render() {
     return(
-      <div>
+      
     <button className = "Button" onClick = {this.props.onClick}>
       {this.props.avgResult.length !== 0 ? "Заново" : "Старт!"}
       </button>
-      </div>
+      
     )
   }
 }
@@ -180,11 +180,11 @@ class ResultButton extends React.Component {
   }
   render(){
     return(
-      <div>
+      
         <button className = "Button" onClick = {this.props.onClick}>
           Узнать результат!
         </button>
-      </div>
+      
     )
   }
 }
