@@ -6,12 +6,6 @@ body {
   color: white;
 }
 
-input {
-  padding: 3px;
-  margin: 10px;
-  border-radius: 5px;
-}
-
 .Logo {
   height: 102px;
   width: 673px;
@@ -21,24 +15,6 @@ input {
 
 .App {
   text-align: center;
-}
-
-.app-title{
-  text-align: center;
-  color: lightslategray;
-  font-size: 50px;
-}
-
-.btn{
-  margin: 20px;
-  color: white;
-  border-radius: 5px;
-}
-
-.add-btn{
-  background: lightslategray;
-  width: 100px;
-  height: 40px;
 }
 
 .yellow {
