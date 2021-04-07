@@ -107,8 +107,8 @@ getYourResult() {
             <div className="App">
                 <Logo />
                 <StartButton onClick = {this.getGreen} avgResult = {this.state.avgResult}/>
-                {this.state.avgResult.length < 4 && this.state.result !== '' && <ContinueButton onClick = {this.submitAndContinue}/>}
-                {this.state.avgResult.length === 4 && <ResultButton onClick = {this.getYourResult} />}
+                {this.state.color === 'red' && this.state.avgResult.length < 4 && this.state.result !== '' && <ContinueButton onClick = {this.submitAndContinue}/>}
+                {this.state.color === 'red' && this.state.avgResult.length === 4 && <ResultButton onClick = {this.getYourResult} />}
                 <ReactZone onClick = {this.getRed} color = {this.state.color} />
                 {this.state.avgResult.length < 5 && this.state.result !== '' && <ResultZone result = {this.state.result}/>}
                 {this.state.avgResult.length !== 0 && <Results avgResult = {this.state.avgResult}/>}
